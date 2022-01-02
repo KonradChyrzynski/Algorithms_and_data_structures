@@ -112,8 +112,9 @@ class LinkedList {
                 current = current.next; // Node after index
             }
             if(previous.next){
-                previous.next = current.next;
+                previous.next = current.next; 
                 current.next.prev = previous.next;
+                current.data , previous.data == null;
             } else{
                 console.log(`Node with index: ${index} doesn't exist`)
             }
@@ -155,5 +156,4 @@ ll.insertFirst(100);   // 2
 ll.insertFirst(300);  // 1
 ll.insertFirst(400); // 0
 ll.removeAt(1);
-ll.clearList();
 ll.printList();

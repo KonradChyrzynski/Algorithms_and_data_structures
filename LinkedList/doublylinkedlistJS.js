@@ -114,7 +114,6 @@ class LinkedList {
             if(previous.next){
                 previous.next = current.next; 
                 current.next.prev = previous.next;
-                current.data , previous.data == null;
             } else{
                 console.log(`Node with index: ${index} doesn't exist`)
             }

@@ -93,11 +93,9 @@ function checkSpecialCharacters(
         }
 
     }
-    console.log(stack.height);
     if(stack.height == 0)
         return true;
     else
         return false;
 }
 
-console.log(checkSpecialCharacters("[]"))

@@ -1,82 +1,90 @@
-class Node {
-    constructor(data, next = null,){
-        this.data = data;
-        this.next = next;
-        this.prev
+class DoublyLinkedList {
+
+    static node = class
+    {
+        constructor(data, next = null, prev = null){
+            this.data = data;
+            this.next = next;
+            this.prev = prev
+        }
     }
-}
 
-
-
-class LinkedList {
     constructor(){
         this.head = null;
+        this.tail = null;
         this.size = 0;
     }
 
     // Insert first node
     insertFirst(data){
-        this.head = new Node(data, this.head);
-        if(this.head.next){
-            this.head.next.prev = this.head;
+        this.head = new DoublyLinkedList.node(data, this.head)
+        if(this.size == 0)
+        {   
+            this.tail = this.head;
         }
         this.size++;
     }
+
     // Insert last node
-    insertLast(data){
-        let node = new Node(data);
-        let current;
-        
-        if(!this.head){
-            this.head = node;
-        } else {
-            current = this.head;
-            while(current.next){
-                current = current.next;
-            }
-
-            current.next = node;
-            current.next.prev = current;
-        }
-
+    insertLast(data)
+    {
+        this.tail = new DoublyLinkedList.node(data,null,this.tail);
+        if(this.size == 0)
+            this.head = this.tail;
+        else
+            this.tail.prev.next = this.tail;
         this.size++;
     }
 
+    reverseBySwitchingNumbers()
+    {
+        let 
+            half = Math.floor(this.size / 2),
+            left = this.head,
+            right = this.tail;
+
+        for(let counter = 1; counter <= half; counter++)
+        {
+            let temp = left.data;
+            left.data = right.data;
+            right.data = temp;
+            
+            left = left.next;
+            right = right.prev;
+        }
+    }
+
+    reverseBySwitchingNumbersFast()
+    {
+        let left = this.head,
+            right = this.tail;
+        for(
+            let fast = this.head;
+            fast?.next != null;
+            fast = fast.next.next
+        ){
+            let temp = left.data;
+            left.data = right.data;
+            right.data = temp;
+            
+            left = left.next;
+            right = right.prev;
+            }
+    }
     // Insert at index
 
-    insertAt(data, index){
-        // If index is out of range
-        if(index > 0 && index > this.size){
-            return;
+    reverseBySwitchingReference()
+    {
+        for(let el1 = this.head, el2; el1 != null; el1 = el2)
+        {
+            el2 = el1.next;
+            el1.next = el1.prev;
+            el1.prev = el2;
         }
 
-
-        if(index === 0 ){
-            this.insertFirst(data);
-            return;
-        }
-
-        const node = new Node(data);
-
-        let current, previous;
-        current = this.head;
-
-        let count = 0;
-
-        while(count < index){
-            previous = current; // Node before index
-            count++;
-            current = current.next; // Node after index
-        }
-
-        node.next = current;
-        node.prev = previous;
-        if(current){
-            current.prev = node;
-        }
-        previous.next = node;
-
-        this.size++;
+        let temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
     }
 
     // Get at index
@@ -147,12 +155,17 @@ class LinkedList {
         }
     }
 
+    // reverse()
+    // {
+    //     for(let count = 1; count <= this.size / 2 ; i++)
+    //     {
+    //         let l = this.head;
+    //         let r = this.tail
+    //     }
+    // }
+
 }
 
-const ll = new LinkedList();
-
-ll.insertFirst(100);   // 2
-ll.insertFirst(300);  // 1
-ll.insertFirst(400); // 0
-ll.removeAt(1);
-ll.printList();
+let ll = new LinkedList();
+ll.insertFirst(10);
+ll.insertLast(20);

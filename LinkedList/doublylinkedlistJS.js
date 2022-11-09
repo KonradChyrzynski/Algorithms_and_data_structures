@@ -87,6 +87,24 @@ class DoublyLinkedList {
         this.tail = temp;
     }
 
+    bubblesort()
+    {
+        for(let swap = true; swap;)
+        {
+            swap = false;
+            for(let left = this.head, right = this.head.next; right != null; left = right, right = left.next )
+            {
+                if(left.data > right.data)
+                {
+                    let temp = left.data;
+                    left.data = right.data;
+                    right.data = temp;
+                    swap = true;
+                }
+            }
+        }
+    }
+
     // Get at index
     getAt(index){
         let current = this.head;
@@ -166,6 +184,8 @@ class DoublyLinkedList {
 
 }
 
-let ll = new LinkedList();
+let ll = new DoublyLinkedList();
 ll.insertFirst(10);
 ll.insertLast(20);
+ll.insertFirst(30);
+ll.bubblesort();

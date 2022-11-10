@@ -17,10 +17,16 @@ class DoublyLinkedList {
 
     // Insert first node
     insertFirst(data){
-        this.head = new DoublyLinkedList.node(data, this.head)
+        let newNode = new DoublyLinkedList.node(data, this.head) 
         if(this.size == 0)
         {   
+            this.head = newNode;
             this.tail = this.head;
+        }
+        else
+        {
+            this.head.prev = newNode;
+            this.head = newNode;
         }
         this.size++;
     }
@@ -34,6 +40,29 @@ class DoublyLinkedList {
         else
             this.tail.prev.next = this.tail;
         this.size++;
+    }
+
+    insertAt(data,index)
+    {
+        if(index != undefined)
+        {
+            if(index == 0 )
+            {
+                this.insertFirst(data)
+                return;
+            }
+    
+            let count = 0;
+            let current = this.head;
+            while(count < index)
+            {
+                current = current.next;
+                count++;
+            }
+            let newNode = new DoublyLinkedList.node(data,current,current.prev)
+            current.prev.next = newNode;
+            size++;
+        }
     }
 
     reverseBySwitchingNumbers()
@@ -172,16 +201,6 @@ class DoublyLinkedList {
             current = current.next;
         }
     }
-
-    // reverse()
-    // {
-    //     for(let count = 1; count <= this.size / 2 ; i++)
-    //     {
-    //         let l = this.head;
-    //         let r = this.tail
-    //     }
-    // }
-
 }
 
 let ll = new DoublyLinkedList();

@@ -16,6 +16,7 @@ class DoublyLinkedList {
     }
 
     // Insert first node
+    //Tested
     insertFirst(data){
         let newNode = new DoublyLinkedList.node(data, this.head) 
         if(this.size == 0)
@@ -32,6 +33,7 @@ class DoublyLinkedList {
     }
 
     // Insert last node
+    //Tested
     insertLast(data)
     {
         this.tail = new DoublyLinkedList.node(data,null,this.tail);
@@ -51,17 +53,53 @@ class DoublyLinkedList {
                 this.insertFirst(data)
                 return;
             }
+            if(index == this.size - 1)
+            {
+                this.insertLast(data);
+                return;
+            }
     
             let count = 0;
             let current = this.head;
+
             while(count < index)
             {
                 current = current.next;
                 count++;
             }
-            let newNode = new DoublyLinkedList.node(data,current,current.prev)
+
+            let newNode = new DoublyLinkedList.node(data,current, current?.prev);
             current.prev.next = newNode;
-            size++;
+            current.prev = newNode;
+            this.size++;
+        }
+    }
+
+    searchAt(index)
+    {
+
+        let half = Math.ceil(this.size / 2);
+        if(index > half)
+        {
+            let current = this.tail;
+            let count = this.size - index - 1;
+            while(count != 0)
+            {
+                current = current.prev
+                count--;
+            }
+            return current;
+        }
+        else
+        {
+            let current = this.head;
+            let count = 0;
+            while(count < index)
+            {
+                current = current.next;
+                count++;
+            }
+            return current;
         }
     }
 
@@ -116,6 +154,7 @@ class DoublyLinkedList {
         this.tail = temp;
     }
 
+    //Tested
     bubblesort()
     {
         for(let swap = true; swap;)
@@ -203,8 +242,13 @@ class DoublyLinkedList {
     }
 }
 
-let ll = new DoublyLinkedList();
-ll.insertFirst(10);
-ll.insertLast(20);
-ll.insertFirst(30);
-ll.bubblesort();
+let l = new DoublyLinkedList();
+l.insertFirst(10);
+l.insertLast(20);
+l.insertFirst(30);
+l.insertFirst(304214);
+l.insertFirst(3052165216521);
+l.insertFirst(5352531);
+l.insertAt(500,2);
+ll.insertAt(69,6)
+l.bubblesort();
